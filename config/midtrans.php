@@ -1,27 +1,10 @@
 <?php
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Midtrans Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Konfigurasi untuk integrasi payment gateway Midtrans (QRIS).
-    | Ganti PLACEHOLDER dengan credentials asli dari dashboard Midtrans.
-    |
-    */
-
-    'server_key' => env('MIDTRANS_SERVER_KEY', 'SB-Mid-server-PLACEHOLDER'),
-    'client_key' => env('MIDTRANS_CLIENT_KEY', 'SB-Mid-client-PLACEHOLDER'),
+    'merchant_id' => env('MIDTRANS_MERCHANT_ID'),
+    'client_key' => env('MIDTRANS_CLIENT_KEY'),
+    'server_key' => env('MIDTRANS_SERVER_KEY'),
     'is_production' => env('MIDTRANS_IS_PRODUCTION', false),
-
-    'snap_url' => env('MIDTRANS_IS_PRODUCTION', false)
-        ? 'https://app.midtrans.com/snap/snap.js'
-        : 'https://app.sandbox.midtrans.com/snap/snap.js',
-
-    'api_url' => env('MIDTRANS_IS_PRODUCTION', false)
-        ? 'https://api.midtrans.com'
-        : 'https://api.sandbox.midtrans.com',
-
+    'is_sanitized' => env('MIDTRANS_IS_SANITIZED', true),
+    'is_3ds' => env('MIDTRANS_IS_3DS', true),
 ];

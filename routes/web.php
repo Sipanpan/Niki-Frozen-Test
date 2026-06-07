@@ -1,18 +1,19 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\SatuanController;
-use App\Http\Controllers\PelangganController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\PenjualanController;
-use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\KaryawanController;
-use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\PembelianController;
+use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\SatuanController;
+use App\Http\Controllers\SupplierController;
+use Illuminate\Support\Facades\Route;
 
 // ============================================================
 // Guest Routes
@@ -109,4 +110,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/laporan/stock-opname', [LaporanController::class, 'stockOpname'])->name('laporan.stock-opname');
     Route::get('/laporan/cek', [LaporanController::class, 'cek'])->name('laporan.cek');
     Route::get('/laporan/tambah', [LaporanController::class, 'tambah'])->name('laporan.tambah');
+
+    Route::get('/checkout', [PaymentController::class, 'checkout']);
+    Route::post('/checkout-kasir', [PaymentController::class, 'checkoutKasir']);
+    Route::post('/midtrans-callback', [PaymentController::class, 'callback']);
 });
