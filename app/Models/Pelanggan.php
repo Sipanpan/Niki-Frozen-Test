@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Pelanggan extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['nama', 'telepon', 'alamat', 'email'];
+
+    public function penjualans()
+    {
+        return $this->hasMany(Penjualan::class);
+    }
+
+    public function piutangs()
+    {
+        return $this->hasManyThrough(Piutang::class, Penjualan::class);
+    }
+}

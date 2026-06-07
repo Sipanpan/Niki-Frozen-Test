@@ -1,11 +1,218 @@
-@import 'tailwindcss';
+/* ============================================================
+   Niki Frozen POS — Design System (Tailwind v4 + Custom)
+   ============================================================ */
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* Tailwind v4 */
+@import "tailwindcss";
+
+/* ============================================================
+   CSS Custom Properties — Theme Tokens
+   ============================================================ */
+:root {
+    /* Brand Colors */
+    --color-accent: 59 130 246;       /* blue-500 */
+    --color-nav-deep: 2 6 23;         /* slate-950 */
+    --color-nav-active: 250 204 21;   /* yellow-400 */
+
+    /* Theme Background */
+    --color-theme-bg: 241 245 249;    /* slate-100 */
+    --color-card-bg: 255 255 255;     /* white */
+    --color-card-border: 226 232 240; /* slate-200 */
+
+    /* Typography */
+    --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+.dark {
+    --color-theme-bg: 2 6 23;         /* slate-950 */
+    --color-card-bg: 15 23 42;        /* slate-900 */
+    --color-card-border: 30 41 59;    /* slate-800 */
+}
+
+/* ============================================================
+   Base Styles
+   ============================================================ */
+html, body {
+    height: 100vh !important;
+    min-height: -webkit-fill-available !important;
+    touch-action: manipulation;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-display);
+}
+
+.font-display {
+    font-family: var(--font-display);
+}
+
+.font-mono {
+    font-family: var(--font-mono);
+}
+
+/* ============================================================
+   Theme Utilities
+   ============================================================ */
+.bg-theme-bg {
+    background-color: rgb(var(--color-theme-bg));
+}
+
+.bg-card {
+    background-color: rgb(var(--color-card-bg));
+}
+
+.border-card {
+    border-color: rgb(var(--color-card-border));
+}
+
+.text-accent {
+    color: rgb(var(--color-accent));
+}
+
+.bg-accent {
+    background-color: rgb(var(--color-accent));
+}
+
+/* ============================================================
+   Custom Scrollbar
+   ============================================================ */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ============================================================
+   Glass Card Effect
+   ============================================================ */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================================
+   Sidebar Styles
+   ============================================================ */
+@media (min-width: 1024px) {
+    #sidebar.desktop-collapsed {
+        margin-left: -16rem !important;
+        transform: translateX(-100%) !important;
+    }
+}
+
+.sidebar-brand-safe-area {
+    padding-top: env(safe-area-inset-top, 0px);
+    height: calc(88px + env(safe-area-inset-top, 0px));
+}
+
+@media (max-width: 1023px) {
+    .sidebar-brand-safe-area {
+        padding-top: max(40px, env(safe-area-inset-top, 0px));
+        height: calc(64px + max(40px, env(safe-area-inset-top, 0px)));
+    }
+}
+
+/* ============================================================
+   Header Safe Area
+   ============================================================ */
+.header-safe-area {
+    padding-top: env(safe-area-inset-top, 0px);
+    height: calc(72px + env(safe-area-inset-top, 0px));
+}
+
+@media (max-width: 1023px) {
+    .header-safe-area {
+        padding-top: env(safe-area-inset-top, 8px);
+        height: calc(60px + env(safe-area-inset-top, 8px));
+    }
+}
+
+/* ============================================================
+   Bottom Nav Safe Area
+   ============================================================ */
+.bottom-nav-safe-area {
+    padding-bottom: max(4px, env(safe-area-inset-bottom));
+}
+
+html.pwa-standalone .bottom-nav-safe-area {
+    padding-bottom: env(safe-area-inset-bottom, 16px);
+}
+
+/* Hide bottom nav when keyboard is open */
+html.keyboard-open .bottom-nav-safe-area {
+    display: none !important;
+}
+
+/* ============================================================
+   Mobile Scroll Area
+   ============================================================ */
+@media (max-width: 1023px) {
+    #global-scroll-area {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    #global-scroll-area > div:not(.edge-to-edge),
+    #global-scroll-area > form:not(.edge-to-edge),
+    #global-scroll-area > table:not(.edge-to-edge),
+    #global-scroll-area > section:not(.edge-to-edge) {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+@keyframes swing {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* ============================================================
+   Print Styles
+   ============================================================ */
+@media print {
+    .print\:hidden {
+        display: none !important;
+    }
 }
